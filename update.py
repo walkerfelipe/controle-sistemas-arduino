@@ -27,17 +27,19 @@ class Application(tk.Frame):
         ax.set_yticklabels([])
         ax.set_theta_zero_location("S")
         canvas=FigureCanvasTkAgg(fig,master=root)
-        canvas.get_tk_widget().grid(row=1,column=1, pady=20, padx=10, sticky='nsew')
+        #canvas.get_tk_widget().grid(row=1,column=1, pady=20, padx=10, sticky='nsew')
+        canvas.get_tk_widget().place(x=50, y=40)
         canvas.show()
 
 
         ## fig 2
-        fig2=plt.figure(figsize=(4,4))
+        fig2=plt.figure(figsize=(10,7))
         #ax=fig.add_axes([0.1,0.1,0.8,0.8],polar=True)
         ax2=fig2.add_subplot(111)
         ax2.set_title("Angulo da coisa")
         canvas2=FigureCanvasTkAgg(fig2,master=root)
-        canvas2.get_tk_widget().grid(row=1,column=5, pady=20, padx=10, sticky='nsew')
+        #canvas2.get_tk_widget().grid(row=1,column=5, pady=10, padx=8)
+        canvas2.get_tk_widget().place(x=400, y=40)
         canvas2.show()
         self.plotbutton=tk.Button(master=root, text="plot", command=lambda: self.plot(canvas,ax))
         self.plotbutton.grid(row=0,column=0)
