@@ -20,6 +20,10 @@ class Application(tk.Frame):
         ax=fig.add_subplot(111,polar=True)
         ax.set_title("Angulo da coisa")
         ax.set_rmax(2.0)
+		###
+        grau=random.randint(0,90)
+        ax.arrow(grau/180.*np.pi, 0.5, 0, 1, alpha = 0.5, width = 0.015,        edgecolor = 'black', facecolor = 'green', lw = 2, zorder = 5) 
+		###
         ax.set_yticklabels([])
         ax.set_theta_zero_location("S")
         canvas=FigureCanvasTkAgg(fig,master=root)
@@ -38,14 +42,14 @@ class Application(tk.Frame):
         self.plotbutton=tk.Button(master=root, text="plot", command=lambda: self.plot(canvas,ax))
         self.plotbutton.grid(row=0,column=0)
     def plot(self,canvas,ax):
+
         ax.clear()  # clear axes from previous plot
         ax.set_theta_zero_location("S")
         ax.set_yticklabels([])
         grau=random.randint(0,90)
-        arr2 = plt.arrow(grau/180.*np.pi, 0.5, 0, 1, alpha = 0.5, width = 0.015,
+        ax.arrow(grau/180.*np.pi, 0.5, 0, 1, alpha = 0.5, width = 0.015,
         edgecolor = 'black', facecolor = 'green', lw = 2, zorder = 5) 
         canvas.draw()
-        canvas.show()
 
 
 root=tk.Tk()
