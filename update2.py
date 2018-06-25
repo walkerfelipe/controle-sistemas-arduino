@@ -8,7 +8,7 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 import matplotlib.animation as animation
 
-import Tkinter as tk
+import tkinter as tk
 import ttk
 
 x = np.linspace(0, 2*np.pi, 1024)
