@@ -23,7 +23,7 @@ void setup()
   //45 º 645
   // 0 º 460
   // - 111,89 º 0 
-  Setpoint = 460;
+  Setpoint = 645;
   //turn the PID on
   myPID.SetMode(AUTOMATIC);
   
@@ -40,25 +40,40 @@ void loop()
   Input=Input/amostragem;
 
   myPID.Compute();
+  double GrauAtual,GrauSetpoint,Tensao;
+  GrauAtual=(Input-460)/4.1111111111;
+  GrauSetpoint=(Setpoint-460)/4.1111111111;
+  Tensao=Output/51;
   //Serial.print(Setpoint);
   //Serial.print(" ");
   //Serial.println(Input);
   //Serial.print(" ");
   //Serial.println(Output);
-
-//  Serial.print(Setpoint);
-//  Serial.print(" ");
-//  Serial.print(Input);
-//  Serial.print("\n");
+  Serial.print(Setpoint);
+  Serial.print(",");
+  Serial.print(Input);
+  Serial.print(",");
+  Serial.print(Output);
+  Serial.print(",");
+  Serial.print(GrauAtual);
+  Serial.print(",");
+  Serial.print(GrauSetpoint);
+  Serial.print(",");
+  Serial.print(Tensao);
+  Serial.print("\n");
+  
   // wait 
-  char text[40];
-  int In,Se,Ou;
-  In=(int)Input;
-  Se=(int)Setpoint;
-  Ou=(int)Output;
-  sprintf(text,"%d,%d,%d\n",In,Se,Ou);
-  Serial.println(text);
-  analogWrite(3,Output);
+ 
+  
+//  char text[40];
+//  int In,Se,Ou;
+//  In=(int)Input;
+//  Se=(int)Setpoint;
+//  Ou=(int)Output;
+//
+//  sprintf(text,"%d,%d,%d\n",In,Se,Ou);
+//  Serial.println(text);
+//  analogWrite(3,Output);
   delay(10);
 
 }
