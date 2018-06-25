@@ -8,7 +8,7 @@
 #include <PID_v1.h>
 
 double Setpoint, Input, Output;
-double incomingByte = 0;
+
 //Specify the links and initial tuning parameters
  PID myPID(&Input, &Output, &Setpoint,0.7,1.5, 0.2 , DIRECT);
 //PID myPID(&Input, &Output, &Setpoint,5,2, 3 , DIRECT);
