@@ -73,7 +73,7 @@ void loop()
 //
 //  sprintf(text,"%d,%d,%d\n",In,Se,Ou);
 //  Serial.println(text);
-//  analogWrite(3,Output);
+  analogWrite(3,Output);
   delay(10);
 
 }
