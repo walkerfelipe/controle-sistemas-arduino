@@ -20,16 +20,16 @@ float contf=0; // contador float para Seno
 //// Funções de Setpoint /////////
 void quadrada(int &contador){
   if (contador <tempo){
-    Setpoint=645;
+    Setpoint=415;
     contador++;}
    else if(contador<2*tempo){
-    Setpoint=840;
+    Setpoint=590;
     contador++;
     }
     else contador=0;
   }
 void onda(int &contador){
-  int dif=(840-645)/tempo;
+  int dif=(590-415)/tempo;
   if (contador<tempo){
     Setpoint+=dif;
     contador++;
@@ -43,11 +43,11 @@ void onda(int &contador){
 
 void onda2(float &contf){
   if (contf<10){
-    Setpoint=sin(contf)*370+460;
+    Setpoint=sin(contf)*175+460;
     contf+=0.02;
     }
     else if (contador<20){
-      Setpoint=sin(contf)*370+460;
+      Setpoint=sin(contf)*175+460;
       contf+=0.02;
       }
      else contf=0;
@@ -58,12 +58,12 @@ void setup()
   Serial.begin(9600);
 
   Input = analogRead(0);
-  //136º  1023
-  // 90 º 830 
-  //45 º 645
-  // 0 º 460
-  // - 111,89 º 0 
-  Setpoint=645;
+  //
+  // 90 º 590 
+  //45 º 415
+  // 0 º 240
+  // º  
+  Setpoint=590;
   //turn the PID on
   myPID.SetMode(AUTOMATIC);
   
@@ -91,8 +91,8 @@ void loop()
   
   ////// Parte de conversão para  plotagem 
   double GrauAtual,GrauSetpoint,Tensao;
-  GrauAtual=(Input-460)/4.1111111111;
-  GrauSetpoint=(Setpoint-460)/4.1111111111;
+  GrauAtual=(Input-240)/3.888888888888888;
+  GrauSetpoint=(Setpoint-240)/3.888888888888888;
   Tensao=Output/51;
 
   Serial.print(Setpoint);
