@@ -1,18 +1,23 @@
 
 /********************************************************
  * Sistema pêndulo-hélice
- * PID
+ * PID 
  * Reading analog input 0 to control analog PWM output 3
  ********************************************************/
 
 #include <PID_v1.h>
+//tempo de duração do Setpoint variavel ( Quadrado e rampa )
 #define tempo 100
 double Setpoint, Input, Output;
-int contador=0;
-float contf=0;
+int contador=0; // contador que auxilia calculo de setpoint variavel
+float contf=0; // contador float para Seno
+
 //Specify the links and initial tuning parameters
+// Parametros do PID Kp, Ki, Kd, açao direta
  PID myPID(&Input, &Output, &Setpoint,0.7,1.5, 0.2 , DIRECT);
 //PID myPID(&Input, &Output, &Setpoint,5,2, 3 , DIRECT);
+
+//// Funções de Setpoint /////////
 void quadrada(int &contador){
   if (contador <tempo){
     Setpoint=645;
@@ -47,13 +52,12 @@ void onda2(float &contf){
       }
      else contf=0;
   }
-
+/////////////// fim de funções de Setpoint ///////////
 void setup()
 {
   Serial.begin(9600);
-//  Serial.begin(9600);
-  //initialize the variables we're linked to
- // Input = analogRead(0);
+
+  Input = analogRead(0);
   //136º  1023
   // 90 º 830 
   //45 º 645
@@ -64,8 +68,9 @@ void setup()
   myPID.SetMode(AUTOMATIC);
   
 }
-  int i=0;
-  int amostragem=100;
+int i=0;
+// Filtragem de entrada, Quantidade de amostras
+int amostragem=100;
 
 void loop()
 {
@@ -81,8 +86,10 @@ void loop()
   Input += analogRead(0);
   }
   Input=Input/amostragem;
-
+	//calculo do PID
   myPID.Compute();
+  
+  ////// Parte de conversão para  plotagem 
   double GrauAtual,GrauSetpoint,Tensao;
   GrauAtual=(Input-460)/4.1111111111;
   GrauSetpoint=(Setpoint-460)/4.1111111111;
@@ -100,7 +107,7 @@ void loop()
   Serial.print(",");
   Serial.print(Tensao);
   Serial.print("\n");
-
+//////////////// fim da saida serial para plotar ///
 
   // wait 
  
